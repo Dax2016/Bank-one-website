@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)http://localhost:63342/bank-one/index.html?_ijt=h06jmv6l80dqdtqcmeqddihd8j&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank One</title>
+    <link rel="stylesheet" href="./Bank One_files/styles.css">
+</head>
+<body>
+    <header>
+        <img src="./Bank One_files/bank-one-logo.png" alt="Bank One Logo" class="logo">
+        <h1>Welcome to Bank One</h1>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:63342/bank-one/dashboard.html">Dashboard</a></li>
+                <li><a href="http://localhost:63342/bank-one/index.html">Home</a></li>
+                <li><a href="http://localhost:63342/bank-one/login.html">Login</a></li>
+                <li><a href="http://localhost:63342/bank-one/register.html">Register</a></li>
+                <li><a href="http://localhost:63342/bank-one/deposit.html">Cash Deposit</a></li>
+                <li><a href="http://localhost:63342/bank-one/withdrawal.html">Withdrawal</a></li>  <!-- Clickable Withdrawal Link -->
+                <li><a href="http://localhost:63342/bank-one/online.html">Online Banking</a></li> <!-- New Link -->
+                <li><a href="http://localhost:63342/bank-one/personal.html">Personal Banking</a></li> <!-- New Link -->
+                <li><a href="http://localhost:63342/bank-one/business.html">Business Banking</a></li> <!-- New Link -->
+                <li><a href="http://localhost:63342/bank-one/profile.html">Profile</a></li> <!-- Profile link if you created it -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Trusted Banking Partner</h2>
+        <p>Manage your finances easily.</p>
+        <br>
+        <p>Thank you for Banking with us!</p>
+    </main>
+    <footer>
+        <p>© 2024 Bank One</p>
+    </footer>
+
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script></body></html>
